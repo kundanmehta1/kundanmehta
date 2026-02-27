@@ -22,7 +22,16 @@
             text-decoration: none;
         }
 
-        /* Header */
+        /* <header>
+  <div style="display: flex; align-items: center; justify-content: center; gap: 25px; flex-wrap: wrap;">
+    <img src="your-photo.jpg" alt="Kundan Mehta" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3);" />
+    <div>
+      <h1 style="margin-bottom: 10px;">Kundan Mehta</h1>
+      <p style="font-size: 20px;">WFM Specialist | Excel Expert | Business Professional</p>
+      <a href="#about" class="btn">Learn More</a>
+    </div>
+  </div>
+</header> */
         header {
             background: linear-gradient(to right, #1f4037, #99f2c8);
             color: white;
@@ -215,4 +224,5 @@
 </footer>
 
 </body>
+
 </html>
