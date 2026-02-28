@@ -8,23 +8,64 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-/* ================= HINDU CALENDAR ================= */
-.calendar-box{
+/* ============ HINDU CALENDAR (FULL) ============ */
+.calendar-layout{
     margin-top:40px;
     display:grid;
-    grid-template-columns:1fr 2fr;
+    grid-template-columns:1.2fr 1fr;
     gap:30px;
-    text-align:left;
 }
 
-.today, .festivals{
+.calendar-panel,
+.festival-panel{
     background:#fff;
     padding:25px;
     border-radius:16px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    text-align:left;
 }
 
-.calendar-box h3{
+.calendar-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.calendar-header button{
+    background:#1f4037;
+    color:#fff;
+    border:none;
+    padding:6px 12px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+}
+
+.calendar-grid div{
+    padding:10px;
+    text-align:center;
+    border-radius:6px;
+    background:#f4f6f8;
+    font-size:14px;
+}
+
+.calendar-grid .day{
+    font-weight:600;
+    background:#e0f2eb;
+}
+
+.calendar-grid .festival-day{
+    background:#99f2c8;
+    font-weight:700;
+}
+
+.festival-panel h3{
     color:#1f4037;
     margin-bottom:15px;
 }
@@ -39,19 +80,12 @@
     font-weight:500;
 }
 
-#festival-list span{
-    display:block;
-    font-size:14px;
-    color:#666;
-}
-
 /* MOBILE */
 @media(max-width:768px){
-    .calendar-box{
+    .calendar-layout{
         grid-template-columns:1fr;
     }
 }
-
 
     
 /* ================= RESET ================= */
@@ -459,19 +493,28 @@ footer{
 </section>
     
 <section id="hindu-calendar" class="section">
-    <h2>Hindu Calendar & Festivals</h2>
+  <h2>Hindu Calendar & Festivals</h2>
 
-    <div class="calendar-box">
-        <div class="today">
-            <h3>Today</h3>
-            <p id="today-date"></p>
-        </div>
+  <div class="calendar-layout">
 
-        <div class="festivals">
-            <h3>Upcoming Festivals</h3>
-            <ul id="festival-list"></ul>
-        </div>
+    <!-- LEFT: CALENDAR -->
+    <div class="calendar-panel">
+      <div class="calendar-header">
+        <button onclick="changeMonth(-1)">‹</button>
+        <h3 id="calendar-month"></h3>
+        <button onclick="changeMonth(1)">›</button>
+      </div>
+
+      <div class="calendar-grid" id="calendar-grid"></div>
     </div>
+
+    <!-- RIGHT: FESTIVALS -->
+    <div class="festival-panel">
+      <h3 id="festival-title"></h3>
+      <ul id="festival-list"></ul>
+    </div>
+
+  </div>
 </section>
     
 <section id="contact" class="section">
@@ -534,45 +577,99 @@ function botReply(type){
 </script>
 
 <script>
-const festivals = [
-  { date: "01-14", name: "Makar Sankranti" },
-  { date: "01-26", name: "Vasant Panchami" },
-  { date: "03-08", name: "Maha Shivaratri" },
-  { date: "03-25", name: "Holi" },
-  { date: "04-17", name: "Ram Navami" },
-  { date: "04-23", name: "Hanuman Jayanti" },
-  { date: "08-19", name: "Raksha Bandhan" },
-  { date: "08-26", name: "Janmashtami" },
-  { date: "09-07", name: "Ganesh Chaturthi" },
-  { date: "10-02", name: "Gandhi Jayanti" },
-  { date: "10-12", name: "Dussehra" },
-  { date: "11-01", name: "Diwali" },
-  { date: "11-15", name: "Bhai Dooj" },
-  { date: "11-19", name: "Chhath Puja" }
-];
+const festivals = {
+  "01-14": "Makar Sankranti",
+  "01-26": "Vasant Panchami",
+  "03-08": "Maha Shivaratri",
+  "03-25": "Holi",
+  "04-17": "Ram Navami",
+  "04-23": "Hanuman Jayanti",
+  "08-19": "Raksha Bandhan",
+  "08-26": "Janmashtami",
+  "09-07": "Ganesh Chaturthi",
+  "10-12": "Dussehra",
+  "11-01": "Diwali",
+  "11-15": "Bhai Dooj"
+};
 
-const today = new Date();
-const todayStr = today.toLocaleDateString("en-IN", {
-    weekday:"long", year:"numeric", month:"long", day:"numeric"
-});
+let currentDate = new Date();
 
-document.getElementById("today-date").innerText = todayStr;
+function renderCalendar(){
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
 
-const list = document.getElementById("festival-list");
-const monthDay = String(today.getMonth()+1).padStart(2,"0") + "-" +
-                 String(today.getDate()).padStart(2,"0");
+  document.getElementById("calendar-month").innerText =
+    `${monthName} ${year}`;
 
-festivals
-  .filter(f => f.date >= monthDay)
-  .slice(0,6)
-  .forEach(f => {
-    const li = document.createElement("li");
-    li.innerHTML = `${f.name} <span>Date: ${f.date}</span>`;
-    list.appendChild(li);
+  const grid = document.getElementById("calendar-grid");
+  grid.innerHTML = "";
+
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  days.forEach(d=>{
+    const div=document.createElement("div");
+    div.className="day";
+    div.innerText=d;
+    grid.appendChild(div);
   });
+
+  const firstDay = new Date(year,month,1).getDay();
+  const totalDays = new Date(year,month+1,0).getDate();
+
+  for(let i=0;i<firstDay;i++){
+    grid.appendChild(document.createElement("div"));
+  }
+
+  for(let d=1; d<=totalDays; d++){
+    const mm = String(month+1).padStart(2,"0");
+    const dd = String(d).padStart(2,"0");
+    const key = `${mm}-${dd}`;
+
+    const cell = document.createElement("div");
+    cell.innerText = d;
+
+    if(festivals[key]){
+      cell.classList.add("festival-day");
+    }
+
+    grid.appendChild(cell);
+  }
+
+  renderFestivals(month, year);
+}
+
+function renderFestivals(month, year){
+  const list = document.getElementById("festival-list");
+  list.innerHTML="";
+  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
+
+  document.getElementById("festival-title").innerText =
+    `${monthName} ${year} Festivals`;
+
+  Object.entries(festivals).forEach(([date,name])=>{
+    const [m,d]=date.split("-");
+    if(parseInt(m)-1===month){
+      const li=document.createElement("li");
+      li.innerText = `${d} ${monthName} – ${name}`;
+      list.appendChild(li);
+    }
+  });
+
+  if(!list.innerHTML){
+    list.innerHTML="<li>No major festivals listed</li>";
+  }
+}
+
+function changeMonth(step){
+  currentDate.setMonth(currentDate.getMonth()+step);
+  renderCalendar();
+}
+
+renderCalendar();
 </script>
     
 </body>
 </html>
+
 
 
