@@ -432,48 +432,9 @@ footer{
 </section>
 
 <footer>
-    © 2026 Kundan Mehta · Professional Portfolio
-</footer>
 
-<!-- CHAT ASSISTANT -->
-<div id="chat-toggle">💬</div>
-
-<div id="chat-box">
-    <div id="chat-header">
-        Kundan’s Assistant
-        <span onclick="document.getElementById('chat-box').style.display='none'">✖</span>
-    </div>
-
-    <div id="chat-messages">
-        <div class="bot">Hi 👋 How can I help you?</div>
-    </div>
-
-    <div id="chat-options">
-        <button onclick="botReply('about')">About</button>
-        <button onclick="botReply('skills')">Skills</button>
-        <button onclick="botReply('links')">Links</button>
-        <button onclick="botReply('contact')">Contact</button>
-    </div>
-</div>
-
-<script>
-document.getElementById("chat-toggle").onclick = () => {
-    document.getElementById("chat-box").style.display = "flex";
-};
-
-function botReply(type){
-    const box = document.getElementById("chat-messages");
-    let text = "";
-
-    if(type==="about") text="Kundan Mehta is a Workforce Management Specialist with strong expertise in Excel and BI tools.";
-    if(type==="skills") text="WFM, Advanced Excel, Power BI, Tableau, Scheduling, Capacity Planning.";
-    if(type==="links") text="Use the Important Links section to access Aadhaar, EPFO, Banking & more.";
-    if(type==="contact") text="Email: kundanmehta328@gmail.com | WhatsApp available.";
-
-    box.innerHTML += `<div class="bot">${text}</div>`;
-    box.scrollTop = box.scrollHeight;
-}
-</script>
+    <script>
+/* === HINDU CALENDAR SCRIPT START === */
 
 let currentDate = new Date();
 let festivalCache = {};
@@ -492,18 +453,14 @@ async function loadFestivals(year){
   const res = await fetch(
     `https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`
   );
-
   const data = await res.json();
   const map = {};
 
-  data.response.holidays.forEach(h => {
+  data.response.holidays.forEach(h=>{
     const d = h.date.datetime;
     const key = `${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
 
-    if (
-      h.type.includes("Hindu") ||
-      h.type.includes("National holiday")
-    ) {
+    if (h.type.includes("Hindu") || h.type.includes("National holiday")) {
       map[key] = h.name;
     }
   });
@@ -589,10 +546,55 @@ function changeMonth(step){
 }
 
 renderCalendar();
+
+/* === HINDU CALENDAR SCRIPT END === */
+</script>
+    © 2026 Kundan Mehta · Professional Portfolio
+</footer>
+
+<!-- CHAT ASSISTANT -->
+<div id="chat-toggle">💬</div>
+
+<div id="chat-box">
+    <div id="chat-header">
+        Kundan’s Assistant
+        <span onclick="document.getElementById('chat-box').style.display='none'">✖</span>
+    </div>
+
+    <div id="chat-messages">
+        <div class="bot">Hi 👋 How can I help you?</div>
+    </div>
+
+    <div id="chat-options">
+        <button onclick="botReply('about')">About</button>
+        <button onclick="botReply('skills')">Skills</button>
+        <button onclick="botReply('links')">Links</button>
+        <button onclick="botReply('contact')">Contact</button>
+    </div>
+</div>
+
+<script>
+document.getElementById("chat-toggle").onclick = () => {
+    document.getElementById("chat-box").style.display = "flex";
+};
+
+function botReply(type){
+    const box = document.getElementById("chat-messages");
+    let text = "";
+
+    if(type==="about") text="Kundan Mehta is a Workforce Management Specialist with strong expertise in Excel and BI tools.";
+    if(type==="skills") text="WFM, Advanced Excel, Power BI, Tableau, Scheduling, Capacity Planning.";
+    if(type==="links") text="Use the Important Links section to access Aadhaar, EPFO, Banking & more.";
+    if(type==="contact") text="Email: kundanmehta328@gmail.com | WhatsApp available.";
+
+    box.innerHTML += `<div class="bot">${text}</div>`;
+    box.scrollTop = box.scrollHeight;
+}
 </script>
 
 </body>
 </html>
+
 
 
 
