@@ -1,5 +1,3 @@
-i am giving you the updated coding, without removing just do the cleanup and rearranging and give add Hindu + indian festival as per real and should change every year instead of constant every year. 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -476,7 +474,7 @@ function botReply(type){
     box.scrollTop = box.scrollHeight;
 }
 </script>
-<script>
+
 let currentDate = new Date();
 let festivalCache = {};
 
@@ -486,26 +484,26 @@ const hinduMonths = [
   "Margashirsha","Pausha","Magha","Phalguna"
 ];
 
-// 🔑 REPLACE YOUR_API_KEY with your real key
 const API_KEY = "ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN";
 
 async function loadFestivals(year){
-  if(festivalCache[year]) return festivalCache[year];
+  if (festivalCache[year]) return festivalCache[year];
 
   const res = await fetch(
     `https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`
   );
-  const data = await res.json();
 
+  const data = await res.json();
   const map = {};
-  data.response.holidays.forEach(h=>{
+
+  data.response.holidays.forEach(h => {
     const d = h.date.datetime;
     const key = `${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
 
-    if(
+    if (
       h.type.includes("Hindu") ||
       h.type.includes("National holiday")
-    ){
+    ) {
       map[key] = h.name;
     }
   });
@@ -527,9 +525,9 @@ async function renderCalendar(){
   grid.innerHTML = "";
 
   ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
-    const div=document.createElement("div");
-    div.className="day";
-    div.innerText=d;
+    const div = document.createElement("div");
+    div.className = "day";
+    div.innerText = d;
     grid.appendChild(div);
   });
 
@@ -549,7 +547,7 @@ async function renderCalendar(){
     const cell = document.createElement("div");
     cell.innerText = d;
 
-    if(dateObj.getDay()===0 || dateObj.getDay()===6){
+    if(dateObj.getDay() === 0 || dateObj.getDay() === 6){
       cell.classList.add("weekend");
     }
 
@@ -566,27 +564,27 @@ async function renderCalendar(){
 
 function renderFestivals(month,year,festivals){
   const list = document.getElementById("festival-list");
-  list.innerHTML="";
+  list.innerHTML = "";
   const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
 
   document.getElementById("festival-title").innerText =
     `${monthName} ${year} Festivals`;
 
   Object.entries(festivals).forEach(([k,v])=>{
-    if(parseInt(k.split("-")[0])-1===month){
-      const li=document.createElement("li");
+    if(parseInt(k.split("-")[0]) - 1 === month){
+      const li = document.createElement("li");
       li.innerText = `${k.split("-")[1]} ${monthName} – ${v}`;
       list.appendChild(li);
     }
   });
 
   if(!list.children.length){
-    list.innerHTML="<li>No major festivals</li>";
+    list.innerHTML = "<li>No major festivals</li>";
   }
 }
 
 function changeMonth(step){
-  currentDate.setMonth(currentDate.getMonth()+step);
+  currentDate.setMonth(currentDate.getMonth() + step);
   renderCalendar();
 }
 
@@ -595,6 +593,7 @@ renderCalendar();
 
 </body>
 </html>
+
 
 
 
