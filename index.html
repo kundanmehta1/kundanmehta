@@ -8,6 +8,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+
+    .weekend{
+    background:#ffe5e5 !important;
+    color:#a40000;
+    font-weight:600;
+}
+
+.festival-day{
+    background:#ffb3b3 !important;
+    font-weight:700;
+    color:#7a0000;
+}
 /* ============ HINDU CALENDAR (FULL) ============ */
 .calendar-layout{
     margin-top:40px;
@@ -578,18 +590,46 @@ function botReply(type){
 
 <script>
 const festivals = {
+  /* JAN */
+  "01-01": "New Year",
   "01-14": "Makar Sankranti",
-  "01-26": "Vasant Panchami",
+  "01-26": "Republic Day",
+
+  /* FEB */
+  "02-14": "Vasant Panchami",
+
+  /* MAR */
   "03-08": "Maha Shivaratri",
   "03-25": "Holi",
+
+  /* APR */
+  "04-14": "Ambedkar Jayanti",
   "04-17": "Ram Navami",
   "04-23": "Hanuman Jayanti",
+
+  /* MAY */
+  "05-01": "Labour Day",
+
+  /* AUG */
+  "08-15": "Independence Day",
   "08-19": "Raksha Bandhan",
   "08-26": "Janmashtami",
+
+  /* SEP */
   "09-07": "Ganesh Chaturthi",
+
+  /* OCT */
+  "10-02": "Gandhi Jayanti",
   "10-12": "Dussehra",
+
+  /* NOV */
   "11-01": "Diwali",
-  "11-15": "Bhai Dooj"
+  "11-15": "Bhai Dooj",
+
+  /* DEC */
+  "12-25": "Christmas"
+};
+</script>
 };
 
 let currentDate = new Date();
@@ -667,9 +707,31 @@ function changeMonth(step){
 
 renderCalendar();
 </script>
-    
+    for(let d=1; d<=totalDays; d++){
+  const mm = String(month+1).padStart(2,"0");
+  const dd = String(d).padStart(2,"0");
+  const key = `${mm}-${dd}`;
+
+  const dateObj = new Date(year, month, d);
+  const day = dateObj.getDay(); // 0=Sun, 6=Sat
+
+  const cell = document.createElement("div");
+  cell.innerText = d;
+
+  if(day === 0 || day === 6){
+    cell.classList.add("weekend");
+  }
+
+  if(festivals[key]){
+    cell.classList.add("festival-day");
+    cell.title = festivals[key];
+  }
+
+  grid.appendChild(cell);
+}
 </body>
 </html>
+
 
 
 
