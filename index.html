@@ -3,309 +3,434 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Kundan Mehta | Professional Portfolio</title>
+<meta name="description" content="Professional portfolio of Kundan Mehta, WFM Specialist and MIS Professional with expertise in Advanced Excel, Power BI, and capacity planning.">
+<meta name="author" content="Kundan Mehta">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kundanmehta1.github.io/kundanmehta/">
+<meta property="og:title" content="Kundan Mehta | WFM Specialist & Data Professional">
+<meta property="og:description" content="Explore the professional portfolio of Kundan Mehta. 4+ years of experience optimizing workforce management, data reporting, and process automation.">
+<meta property="og:image" content="https://kundanmehta1.github.io/kundanmehta/profile.jpg">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://kundanmehta1.github.io/kundanmehta/">
+<meta property="twitter:title" content="Kundan Mehta | WFM Specialist & Data Professional">
+<meta property="twitter:description" content="Explore the professional portfolio of Kundan Mehta. 4+ years of experience optimizing workforce management and data reporting.">
+<meta property="twitter:image" content="https://kundanmehta1.github.io/kundanmehta/profile.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-    
 /* ====================================== RESET =========================================== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
-body{
-    font-family:"Segoe UI", sans-serif;
-    background:#f4f6f8;
-    color:#333;
-    line-height:1.6;
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
 }
+
 /* =========================================== NAVBAR ============================================ */
-nav{
-    position:sticky;
-    top:0;
-    background:#1f4037;
-    padding:14px 0;
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    z-index:1000;
+nav {
+    position: sticky;
+    top: 0;
+    background: rgba(31, 64, 55, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
 }
-nav a{
-    color:#fff;
-    text-decoration:none;
-    font-weight:600;
-    padding:6px 14px;
-    border-radius:20px;
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
-nav a:hover{
-    background:#99f2c8;
-    color:#1f4037;
+nav a:hover {
+    background: #99f2c8;
+    color: #1f4037;
 }
+
 /* ======================================== HERO ========================================== */
-header{
-    background:linear-gradient(135deg,#1f4037,#99f2c8);
-    padding:90px 20px;
-    color:#fff;
+header {
+    background: linear-gradient(135deg, #1f4037, #99f2c8);
+    padding: 100px 20px;
+    color: #fff;
 }
-.hero{
-    max-width:1100px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    gap:50px;
-    flex-wrap:wrap;
+.hero {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
 }
-.hero img{
-    width:170px;
-    height:170px;
-    border-radius:50%;
-    object-fit:cover;
-    border:4px solid #fff;
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+.hero img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
-.hero-text h1{
-    font-size:46px;
-    margin-bottom:10px;
+.hero-text h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
-.hero-text p{
-    font-size:20px;
-    margin-bottom:25px;
+.hero-text p {
+    font-size: 20px;
+    margin-bottom: 25px;
+    opacity: 0.9;
 }
-.btn{
-    display:inline-block;
-    padding:12px 30px;
-    background:#fff;
-    color:#1f4037;
-    font-weight:600;
-    border-radius:30px;
-    text-decoration:none;
+.btn-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
-.btn:hover{
-    background:#1f4037;
-    color:#fff;
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 32px;
+    background: #fff;
+    color: #1f4037;
+    font-weight: 600;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 2px solid #fff;
 }
-/* ========================================= SECTION ============================================ */
-.section{
-    max-width:1100px;
-    margin:auto;
-    padding:80px 20px;
-    text-align:center;
+.btn:hover {
+    background: #1f4037;
+    color: #fff;
+    border-color: #1f4037;
+    transform: translateY(-2px);
 }
-.section h2{
-    font-size:36px;
-    color:#1f4037;
-    margin-bottom:20px;
+.btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    box-shadow: none;
 }
-.section p{
-    max-width:750px;
-    margin:auto;
-    font-size:18px;
+.btn-outline:hover {
+    background: #fff;
+    color: #1f4037;
 }
-/* ==========================================CALENDAR ===========================================*/
-.calendar-layout{
-  display:grid;grid-template-columns:1.2fr 1fr;gap:30px;margin-top:40px
+
+/* ========================================= SECTIONS ============================================ */
+.section {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 20px;
+    text-align: center;
 }
-.calendar-panel,.festival-panel{
-  background:#fff;padding:25px;border-radius:16px;
-  box-shadow:0 6px 20px rgba(0,0,0,.08)
+.section h2 {
+    font-size: 36px;
+    color: #1f4037;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
 }
-.calendar-header{
-  display:flex;justify-content:space-between;align-items:center;margin-bottom:15px
+.section h2::after {
+    content: '';
+    width: 60%;
+    height: 4px;
+    background: #99f2c8;
+    position: absolute;
+    bottom: -10px;
+    left: 20%;
+    border-radius: 2px;
 }
-.calendar-header button{
-  background:#1f4037;color:#fff;border:none;
-  padding:6px 12px;border-radius:6px;cursor:pointer
+.section p {
+    max-width: 800px;
+    margin: auto;
+    font-size: 16px;
+    color: #555;
+    text-align: justify;
 }
-.calendar-grid{
-  display:grid;grid-template-columns:repeat(7,1fr);gap:8px
-}
-.calendar-grid div{
-  padding:10px;text-align:center;border-radius:6px;
-  background:#f4f6f8;font-size:14px
-}
-.day{background:#e0f2eb;font-weight:600}
-.weekend{background:#ffe5e5;color:#a40000;font-weight:600}
-.festival-day{background:#ffb3b3;color:#7a0000;font-weight:700}
-    
+
 /* ===================================== SKILLS ========================================= */
-.skills{
-    margin-top:40px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
+.skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
 }
-.skill{
-    background:#fff;
-    padding:22px;
-    border-radius:14px;
-    font-weight:600;
-    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+.skill {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #1f4037;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 5px solid #99f2c8;
 }
-.skill:hover{
-    transform:translateY(-6px);
+.skill:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
+
 /* ===================================== IMPORTANT LINKS ==================================== */
-.links-grid{
-    margin-top:40px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
-    text-align:left;
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: left;
+    margin-top: 40px;
 }
-.link-group{
-    background:#fff;
-    padding:25px;
-    border-radius:16px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+.link-group {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: 0.3s ease;
 }
-.link-group h3{
-    font-size:20px;
-    color:#1f4037;
-    margin-bottom:15px;
+.link-group:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
-.link-group ul{
-    list-style:none;
+.link-group h3 {
+    font-size: 18px;
+    color: #1f4037;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
 }
-.link-group li{
-    margin-bottom:12px;
+.link-group ul { list-style: none; }
+.link-group li { margin-bottom: 15px; }
+.link-group a {
+    font-weight: 500;
+    color: #0077b5;
+    text-decoration: none;
+    transition: 0.2s ease;
+    display: flex;
+    align-items: center;
 }
-.link-group a{
-    font-weight:600;
-    color:#0077b5;
-    text-decoration:none;
+.link-group a:hover { color: #1f4037; padding-left: 5px; }
+
+/* ========================================== CALENDAR ===========================================*/
+.calendar-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+    text-align: left;
 }
-.link-group a:hover{
-    text-decoration:underline;
+.calendar-panel, .festival-panel {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
-.link-group span{
-    display:block;
-    font-size:14px;
-    color:#666;
-    margin-top:4px;
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
+.calendar-header button {
+    background: #1f4037;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.calendar-header button:hover { background: #142e27; }
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+.calendar-grid div {
+    padding: 12px 5px;
+    text-align: center;
+    border-radius: 8px;
+    background: #f8f9fa;
+    font-size: 14px;
+}
+.day { background: #e0f2eb !important; font-weight: 600; color: #1f4037; }
+.weekend { background: #ffe5e5 !important; color: #a40000; font-weight: 600; }
+.festival-day { background: #ffb3b3 !important; color: #7a0000; font-weight: 700; cursor: pointer;}
+.festival-panel h3 { margin-bottom: 20px; color: #1f4037; }
+.festival-panel ul { list-style: none; }
+.festival-panel li {
+    padding: 10px;
+    background: #f8f9fa;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #ffb3b3;
+}
+
 /* ========================================== CONTACT ======================================== */
-.contacts{
-    margin-top:30px;
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
+.contacts {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
 }
-.contact{
-    padding:12px 22px;
-    color:#fff;
-    font-weight:600;
-    border-radius:8px;
-    text-decoration:none;
-    display:flex;
-    align-items:center;
-    gap:8px;
+.contact {
+    padding: 15px 30px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-.whatsapp{background:#25D366;}
-.email{background:#EA4335;}
-.linkedin{background:#0077b5;}
-.contact:hover{opacity:0.9;}
+.whatsapp { background: #25D366; }
+.email { background: #EA4335; }
+.linkedin { background: #0077b5; }
+.contact:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); color:#fff; }
+
 /* ===================================== FOOTER =========================================== */
-footer{
-    background:#1f4037;
-    color:#fff;
-    padding:10px;
-    text-align:center;
-    font-size:14px;
+footer {
+    background: #1f4037;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 60px;
 }
+
 /* ================================= CHAT ASSISTANT ========================================= */
-#chat-toggle{
-    position:fixed;
-    bottom:25px;
-    right:25px;
-    background:#1f4037;
-    color:#fff;
-    font-size:22px;
-    padding:14px 16px;
-    border-radius:50%;
-    cursor:pointer;
-    box-shadow:0 6px 20px rgba(0,0,0,0.3);
-    z-index:9999;
+#chat-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #1f4037;
+    color: #fff;
+    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    z-index: 9999;
+    transition: transform 0.3s ease;
 }
-#chat-box{
-    position:fixed;
-    bottom:90px;
-    right:25px;
-    width:300px;
-    background:#fff;
-    border-radius:14px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.25);
-    display:none;
-    flex-direction:column;
-    overflow:hidden;
-    z-index:9999;
+#chat-toggle:hover { transform: scale(1.1); }
+#chat-box {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 320px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    border: 1px solid #eee;
 }
-#chat-header{
-    background:#1f4037;
-    color:#fff;
-    padding:12px;
-    font-weight:600;
-    display:flex;
-    justify-content:space-between;
+#chat-header {
+    background: #1f4037;
+    color: #fff;
+    padding: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-#chat-messages{
-    padding:15px;
-    height:240px;
-    overflow-y:auto;
-    font-size:14px;
+#chat-header span { cursor: pointer; font-size: 18px; }
+#chat-messages {
+    padding: 15px;
+    height: 300px;
+    overflow-y: auto;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f8f9fa;
 }
-.bot{
-    background:#f1f3f5;
-    padding:10px;
-    border-radius:10px;
-    margin-bottom:10px;
+.msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; }
+.bot-msg { background: #e0f2eb; color: #1f4037; align-self: flex-start; border-bottom-left-radius: 2px;}
+.user-msg { background: #1f4037; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px;}
+
+#chat-options {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    background: #fff;
+    border-top: 1px solid #eee;
 }
-#chat-options{
-    padding:10px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
+#chat-options button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #f0f0f0;
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: 'Poppins', sans-serif;
 }
-#chat-options button{
-    padding:8px;
-    border:none;
-    border-radius:8px;
-    background:#99f2c8;
-    color:#1f4037;
-    font-weight:600;
-    cursor:pointer;
-}
+#chat-options button:hover { background: #99f2c8; color: #1f4037; }
+
 /* =========================================== MOBILE ================================================ */
-@media(max-width:768px){
-    .hero{
-        justify-content:center;
-        text-align:center;
-    }
-    .hero-text h1{
-        font-size:34px;
-    }
+@media(max-width: 768px) {
+    .hero-text { text-align: center; }
+    .btn-group { justify-content: center; }
+    .calendar-layout { grid-template-columns: 1fr; }
+    nav { justify-content: center; }
+    #chat-box { width: 90%; right: 5%; bottom: 100px; }
 }
 </style>
 </head>
 <body>
+
 <nav>
     <a href="#">Home</a>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#important-links">Important Links</a>
-    <a href="#Calendar">Hindu-calendar</a>
+    <a href="#calendar-section">Calendar</a>
     <a href="#contact">Contact</a>
 </nav>
+
 <header>
     <div class="hero">
         <img src="profile.jpg" alt="Kundan Mehta">
         <div class="hero-text">
             <h1>Kundan Mehta</h1>
             <p>WFM Specialist | Excel Expert | Business Professional</p>
-            <a href="#about" class="btn">Explore My Profile</a>
+            <div class="btn-group">
+                <a href="#about" class="btn">Explore My Profile</a>
+                <a href="resume.pdf" class="btn btn-outline" download="Kundan_Mehta_Resume.pdf">
+                    <i class="fas fa-file-download"></i> Download Resume
+                </a>
+            </div>
         </div>
     </div>
 </header>
+
 <section id="about" class="section">
     <h2>About Me</h2>
     <p>
@@ -313,111 +438,75 @@ footer{
     </p>
 </section>
 
-    
-    
-    
-    <section id="skills" class="section">
+<section id="skills" class="section">
     <h2>Core Skills</h2>
     <div class="skills">
         <div class="skill">WFM Specialist</div>
         <div class="skill">Capacity Planning</div>
-        <div class="skill">Scheduling</div>
-        <div class="skill">Forecasting</div>
+        <div class="skill">Scheduling & Forecasting</div>
         <div class="skill">Reporting Analyst</div>
         <div class="skill">Advanced Excel</div>
-        <div class="skill">Power BI</div>
-        <div class="skill">Tableau</div>
-        <div class="skill">Business Analysis</div>
-        <div class="skill">Data Visualization</div>
+        <div class="skill">Power BI & Tableau</div>
     </div>
 </section>
 
-    
-    
-    <section id="important-links" class="section">
+<section id="important-links" class="section">
     <h2>Important Links</h2>
     <div class="links-grid">
         <div class="link-group">
             <h3>🆔 Government & Identity</h3>
             <ul>
-                <li><a href="https://uidai.gov.in" target="_blank">Aadhaar Portal</a></li>
-                <li><a href="https://www.epfindia.gov.in" target="_blank">EPFO</a></li>
-                <li><a href="https://www.incometax.gov.in" target="_blank">Income Tax</a></li>
-                <li><a href="https://www.india.gov.in" target="_blank">National Portal</a></li>
-                <li><a href="https://parivahan.gov.in" target="_blank">Parivahan Seva</a></li>
-                <li><a href="https://www.digilocker.gov.in/" target="_blank">Parivahan Seva</a></li>
+                <li><a href="https://uidai.gov.in" target="_blank"><i class="fas fa-id-card"></i>&nbsp; Aadhaar Portal</a></li>
+                <li><a href="https://www.epfindia.gov.in" target="_blank"><i class="fas fa-briefcase"></i>&nbsp; EPFO</a></li>
+                <li><a href="https://www.incometax.gov.in" target="_blank"><i class="fas fa-file-invoice-dollar"></i>&nbsp; Income Tax</a></li>
             </ul>
         </div>
         <div class="link-group">
-            <h3>📈 Stock Brokers & Trading Apps</h3>
+            <h3>📈 Trading Apps</h3>
             <ul>
-                <li><a href="https://groww.in" target="_blank">Groww</a></li>
-                <li><a href="https://www.angelone.in" target="_blank">Angel One</a></li>
-                <li><a href="https://zerodha.com" target="_blank">Zerodha</a></li>
+                <li><a href="https://groww.in" target="_blank"><i class="fas fa-chart-line"></i>&nbsp; Groww</a></li>
+                <li><a href="https://www.angelone.in" target="_blank"><i class="fas fa-chart-pie"></i>&nbsp; Angel One</a></li>
+                <li><a href="https://zerodha.com" target="_blank"><i class="fas fa-coins"></i>&nbsp; Zerodha</a></li>
             </ul>
         </div>
         <div class="link-group">
-            
-            <h3>📧 Communication</h3>
+            <h3>💳 Banking</h3>
             <ul>
-                <li><a href="https://mail.google.com" target="_blank">Gmail</a></li>
-                <li><a href="https://web.whatsapp.com" target="_blank">WhatsApp Web</a></li>
-                <li><a href="https://outlook.live.com" target="_blank">Outlook</a></li>
-            </ul>
-        </div>
-        <div class="link-group">
-            <h3>💳 Banking & Payments</h3>
-            <ul>
-                <li><a href="https://www.onlinesbi.sbi" target="_blank">SBI</a></li>
-                <li><a href="https://paytm.com" target="_blank">Paytm</a></li>
-                <li><a href="https://www.phonepe.com" target="_blank">PhonePe</a></li>
-                <li><a href="https://pay.google.com" target="_blank">Google Pay</a></li>
+                <li><a href="https://www.onlinesbi.sbi" target="_blank"><i class="fas fa-university"></i>&nbsp; SBI Online</a></li>
+                <li><a href="https://paytm.com" target="_blank"><i class="fas fa-mobile-alt"></i>&nbsp; Paytm</a></li>
+                <li><a href="https://www.phonepe.com" target="_blank"><i class="fas fa-rupee-sign"></i>&nbsp; PhonePe</a></li>
             </ul>
         </div>
         <div class="link-group">
             <h3>🎓 Education & Jobs</h3>
             <ul>
-                <li><a href="https://www.upsc.gov.in" target="_blank">UPSC</a></li>
-                <li><a href="https://ssc.nic.in" target="_blank">SSC</a></li>
-                <li><a href="https://www.linkedin.com" target="_blank">LinkedIn</a></li>
-            </ul>
-        </div>
-        <div class="link-group">
-            <h3>🛒 Shopping & Travel</h3>
-            <ul>
-                <li><a href="https://www.amazon.in" target="_blank">Amazon</a></li>
-                <li><a href="https://www.flipkart.com" target="_blank">Flipkart</a></li>
-                <li><a href="https://www.irctc.co.in" target="_blank">IRCTC</a></li>
+                <li><a href="https://www.upsc.gov.in" target="_blank"><i class="fas fa-graduation-cap"></i>&nbsp; UPSC</a></li>
+                <li><a href="https://ssc.nic.in" target="_blank"><i class="fas fa-building"></i>&nbsp; SSC</a></li>
+                <li><a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i>&nbsp; LinkedIn</a></li>
             </ul>
         </div>
     </div>
 </section>
-    
 
-    
-    
-    <section id="Hindu-calendar" class="section">
-<h2>Hindu Calendar & Festivals</h2>
-<div class="calendar-layout">
-  <div class="calendar-panel">
-    <div class="calendar-header">
-      <button onclick="changeMonth(-1)">‹</button>
-      <h3 id="calendar-month"></h3>
-      <button onclick="changeMonth(1)">›</button>
+<section id="calendar-section" class="section">
+    <h2>Hindu Calendar & Festivals</h2>
+    <div class="calendar-layout">
+        <div class="calendar-panel">
+            <div class="calendar-header">
+                <button onclick="changeMonth(-1)">‹ Prev</button>
+                <h3 id="calendar-month"></h3>
+                <button onclick="changeMonth(1)">Next ›</button>
+            </div>
+            <div class="calendar-grid" id="calendar-grid"></div>
+        </div>
+        <div class="festival-panel">
+            <h3 id="festival-title"></h3>
+            <ul id="festival-list"></ul>
+        </div>
     </div>
-    <div class="calendar-grid" id="calendar-grid"></div>
-  </div>
-  <div class="festival-panel">
-    <h3 id="festival-title"></h3>
-    <ul id="festival-list"></ul>
-  </div>
-</div>
 </section>
-    
 
-    
-    
-    <section id="contact" class="section">
+<section id="contact" class="section">
     <h2>Contact</h2>
     <div class="contacts">
         <a class="contact whatsapp" href="https://wa.me/917631298918" target="_blank">
@@ -432,210 +521,167 @@ footer{
     </div>
 </section>
 
-    
-    
-    <footer>
-<section id="Calendar" class="section">
-    <h2>Calendar</h2>
-    <div class="Calendar">
-    
-    <script>
-/* === HINDU CALENDAR SCRIPT START === */
-let currentDate = new Date();
-let festivalCache = {};
-const hinduMonths = [
-  "Chaitra","Vaishakha","Jyeshtha","Ashadha",
-  "Shravana","Bhadrapada","Ashwin","Kartika",
-  "Margashirsha","Pausha","Magha","Phalguna"
-];
-const API_KEY = "ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN";
-async function loadFestivals(year){
-  if (festivalCache[year]) return festivalCache[year];
-  const res = await fetch(
-    `https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`
-  );
-  const data = await res.json();
-  const map = {};
-  data.response.holidays.forEach(h=>{
-    const d = h.date.datetime;
-    const key = `${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
-    if (h.type.includes("Hindu") || h.type.includes("National holiday")) {
-      map[key] = h.name;
-    }
-  });
-  festivalCache[year] = map;
-  return map;
-}
-async function renderCalendar(){
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
-  document.getElementById("calendar-month").innerText =
-    `${monthName} ${year} • ${hinduMonths[month]}`;
-  const festivals = await loadFestivals(year);
-  const grid = document.getElementById("calendar-grid");
-  grid.innerHTML = "";
-  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
-    const div = document.createElement("div");
-    div.className = "day";
-    div.innerText = d;
-    grid.appendChild(div);
-  });
-  const firstDay = new Date(year,month,1).getDay();
-  const totalDays = new Date(year,month+1,0).getDate();
-  for(let i=0;i<firstDay;i++){
-    grid.appendChild(document.createElement("div"));
-  }
-  for(let d=1; d<=totalDays; d++){
-    const mm = String(month+1).padStart(2,"0");
-    const dd = String(d).padStart(2,"0");
-    const key = `${mm}-${dd}`;
-    const dateObj = new Date(year,month,d);
-    const cell = document.createElement("div");
-    cell.innerText = d;
-    if(dateObj.getDay() === 0 || dateObj.getDay() === 6){
-      cell.classList.add("weekend");
-    }
-    if(festivals[key]){
-      cell.classList.add("festival-day");
-      cell.title = festivals[key];
-    }
-    grid.appendChild(cell);
-  }
-  renderFestivals(month,year,festivals);
-}
-function renderFestivals(month,year,festivals){
-  const list = document.getElementById("festival-list");
-  list.innerHTML = "";
-  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
-  document.getElementById("festival-title").innerText =
-    `${monthName} ${year} Festivals`;
-  Object.entries(festivals).forEach(([k,v])=>{
-    if(parseInt(k.split("-")[0]) - 1 === month){
-      const li = document.createElement("li");
-      li.innerText = `${k.split("-")[1]} ${monthName} – ${v}`;
-      list.appendChild(li);
-    }
-  });
-  if(!list.children.length){
-    list.innerHTML = "<li>No major festivals</li>";
-  }
-}
-function changeMonth(step){
-  currentDate.setMonth(currentDate.getMonth() + step);
-  renderCalendar();
-}
-renderCalendar();
-/* === HINDU CALENDAR SCRIPT END === */
-</script>
-
-        
-        
-© 2026 Kundan Mehta · Professional Portfolio
+<footer>
+    © 2026 Kundan Mehta · Professional Portfolio
 </footer>
 
-        
-<!-- CHAT ASSISTANT -->
-<div id="chat-toggle">💬</div>
+<div id="chat-toggle">
+    <i class="fas fa-comment-dots"></i>
+</div>
 <div id="chat-box">
     <div id="chat-header">
         Kundan’s Assistant
-        <span onclick="document.getElementById('chat-box').style.display='none'">✖</span>
+        <span onclick="document.getElementById('chat-box').style.display='none'"><i class="fas fa-times"></i></span>
     </div>
     <div id="chat-messages">
-        <div class="bot">Hi 👋 How can I help you?</div>
+        <div class="msg bot-msg">Hi 👋 I am Kundan's virtual assistant. How can I help you?</div>
     </div>
     <div id="chat-options">
-        <button onclick="botReply('about')">About</button>
+        <button onclick="botReply('about')">About Kundan</button>
         <button onclick="botReply('skills')">Skills</button>
-        <button onclick="botReply('links')">Links</button>
+        <button onclick="botReply('links')">Quick Links</button>
         <button onclick="botReply('contact')">Contact</button>
     </div>
 </div>
+
 <script>
+/* =================== CHATBOT LOGIC =================== */
 document.getElementById("chat-toggle").onclick = () => {
-    document.getElementById("chat-box").style.display = "flex";
+    const box = document.getElementById("chat-box");
+    box.style.display = box.style.display === "flex" ? "none" : "flex";
 };
-function botReply(type){
+
+function botReply(type) {
     const box = document.getElementById("chat-messages");
-    let text = "";
-    if(type==="about") text="Kundan Mehta is a Workforce Management Specialist with strong expertise in Excel and BI tools.";
-    if(type==="skills") text="WFM, Advanced Excel, Power BI, Tableau, Scheduling, Capacity Planning.";
-    if(type==="links") text="Use the Important Links section to access Aadhaar, EPFO, Banking & more.";
-    if(type==="contact") text="Email: kundanmehta328@gmail.com | WhatsApp available.";
-    box.innerHTML += `<div class="bot">${text}</div>`;
+    
+    // 1. Add User Message
+    let userText = "";
+    if(type === "about") userText = "Tell me about Kundan.";
+    if(type === "skills") userText = "What are his core skills?";
+    if(type === "links") userText = "Where are the quick links?";
+    if(type === "contact") userText = "How can I contact him?";
+    
+    box.innerHTML += `<div class="msg user-msg">${userText}</div>`;
     box.scrollTop = box.scrollHeight;
+
+    // 2. Add Bot Reply with slight delay for realism
+    setTimeout(() => {
+        let botText = "";
+        if(type === "about") botText = "Kundan is a Workforce Management Specialist with strong expertise in Excel, Power BI, and capacity planning.";
+        if(type === "skills") botText = "His core skills include WFM, Advanced Excel, Power BI, Tableau, Scheduling, and Capacity Planning.";
+        if(type === "links") botText = "Scroll up to the 'Important Links' section to access Govt portals, Banking, and Trading tools.";
+        if(type === "contact") botText = "You can email him at kundanmehta328@gmail.com or use the WhatsApp/LinkedIn buttons below.";
+        
+        box.innerHTML += `<div class="msg bot-msg">${botText}</div>`;
+        box.scrollTop = box.scrollHeight;
+    }, 400);
 }
-let currentDate=new Date();
-let cache={};
-const hinduMonths=[
+
+/* =================== CALENDAR LOGIC =================== */
+let currentDate = new Date();
+let festivalCache = {};
+const hinduMonths = [
  "Chaitra","Vaishakha","Jyeshtha","Ashadha",
  "Shravana","Bhadrapada","Ashwin","Kartika",
  "Margashirsha","Pausha","Magha","Phalguna"
 ];
-const API_KEY="ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN";
-async function loadFestivals(year){
- if(cache[year]) return cache[year];
- const res=await fetch(
-  `https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`
- );
- const data=await res.json();
- const map={};
- data.response.holidays.forEach(h=>{
-  const d=h.date.datetime;
-  const key=`${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
-  if(h.type.includes("Hindu")||h.type.includes("National")) map[key]=h.name;
- });
- cache[year]=map;
- return map;
+const API_KEY = "ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN"; 
+
+async function loadFestivals(year) {
+    if(festivalCache[year]) return festivalCache[year];
+    try {
+        const res = await fetch(`https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`);
+        const data = await res.json();
+        const map = {};
+        if(data.response && data.response.holidays) {
+            data.response.holidays.forEach(h => {
+                const d = h.date.datetime;
+                const key = `${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
+                if(h.type.includes("Hindu") || h.type.includes("National holiday")) {
+                    map[key] = h.name;
+                }
+            });
+        }
+        festivalCache[year] = map;
+        return map;
+    } catch(err) {
+        console.error("Calendar API failed to load", err);
+        return {};
+    }
 }
-async function renderCalendar(){
- const y=currentDate.getFullYear();
- const m=currentDate.getMonth();
- document.getElementById("calendar-month").innerText=
-  `${currentDate.toLocaleString("en-IN",{month:"long"})} ${y} • ${hinduMonths[m]}`;
- const festivals=await loadFestivals(y);
- const grid=document.getElementById("calendar-grid");
- grid.innerHTML="";
- ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
-  const el=document.createElement("div");
-  el.className="day";el.innerText=d;grid.appendChild(el);
- });
- const first=new Date(y,m,1).getDay();
- const total=new Date(y,m+1,0).getDate();
- for(let i=0;i<first;i++) grid.appendChild(document.createElement("div"));
- for(let d=1;d<=total;d++){
-  const el=document.createElement("div");
-  el.innerText=d;
-  const date=new Date(y,m,d);
-  const key=`${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-  if(date.getDay()==0||date.getDay()==6) el.classList.add("weekend");
-  if(festivals[key]){el.classList.add("festival-day");el.title=festivals[key]}
-  grid.appendChild(el);
- }
- renderFestivalList(m,y,festivals);
+
+async function renderCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const monthName = currentDate.toLocaleString("en-IN", {month:"long"});
+    
+    document.getElementById("calendar-month").innerText = `${monthName} ${year} • ${hinduMonths[month]}`;
+    
+    const festivals = await loadFestivals(year);
+    const grid = document.getElementById("calendar-grid");
+    grid.innerHTML = "";
+    
+    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d => {
+        const div = document.createElement("div");
+        div.className = "day";
+        div.innerText = d;
+        grid.appendChild(div);
+    });
+    
+    const firstDay = new Date(year, month, 1).getDay();
+    const totalDays = new Date(year, month + 1, 0).getDate();
+    
+    for(let i = 0; i < firstDay; i++) {
+        grid.appendChild(document.createElement("div"));
+    }
+    
+    for(let d = 1; d <= totalDays; d++) {
+        const mm = String(month + 1).padStart(2,"0");
+        const dd = String(d).padStart(2,"0");
+        const key = `${mm}-${dd}`;
+        const dateObj = new Date(year, month, d);
+        const cell = document.createElement("div");
+        
+        cell.innerText = d;
+        
+        if(dateObj.getDay() === 0 || dateObj.getDay() === 6) {
+            cell.classList.add("weekend");
+        }
+        if(festivals[key]) {
+            cell.classList.add("festival-day");
+            cell.title = festivals[key];
+        }
+        grid.appendChild(cell);
+    }
+    renderFestivals(month, year, festivals, monthName);
 }
-function renderFestivalList(m,y,f){
- const list=document.getElementById("festival-list");
- list.innerHTML="";
- document.getElementById("festival-title").innerText=
-  `${currentDate.toLocaleString("en-IN",{month:"long"})} ${y} Festivals`;
- Object.entries(f).forEach(([k,v])=>{
-  if(parseInt(k.split("-")[0])-1===m){
-   const li=document.createElement("li");
-   li.innerText=`${k.split("-")[1]} – ${v}`;
-   list.appendChild(li);
-  }
- });
- if(!list.children.length) list.innerHTML="<li>No festivals</li>";
+
+function renderFestivals(month, year, festivals, monthName) {
+    const list = document.getElementById("festival-list");
+    list.innerHTML = "";
+    document.getElementById("festival-title").innerText = `${monthName} ${year} Festivals`;
+    
+    let hasFestivals = false;
+    Object.entries(festivals).forEach(([k,v]) => {
+        if(parseInt(k.split("-")[0]) - 1 === month) {
+            const li = document.createElement("li");
+            li.innerHTML = `<strong>${k.split("-")[1]} ${monthName}</strong>: ${v}`;
+            list.appendChild(li);
+            hasFestivals = true;
+        }
+    });
+    
+    if(!hasFestivals) {
+        list.innerHTML = "<li>No major festivals this month.</li>";
+    }
 }
-function changeMonth(n){
- currentDate.setMonth(currentDate.getMonth()+n);
- renderCalendar();
+
+function changeMonth(step) {
+    currentDate.setMonth(currentDate.getMonth() + step);
+    renderCalendar();
 }
+
 renderCalendar();
 </script>
 </body>
 </html>
-
-
