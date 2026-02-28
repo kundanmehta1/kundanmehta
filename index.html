@@ -565,8 +565,128 @@ function botReply(type){
 }
 </script>
 
+<script>
+let currentDate = new Date();
+let festivalCache = {};
+
+const hinduMonths = [
+  "Chaitra","Vaishakha","Jyeshtha","Ashadha",
+  "Shravana","Bhadrapada","Ashwin","Kartika",
+  "Margashirsha","Pausha","Magha","Phalguna"
+];
+
+// 🔑 REPLACE YOUR_API_KEY with your real key
+const API_KEY = "PASTE_YOUR_API_KEY_HERE";
+
+async function loadFestivals(year){
+  if(festivalCache[year]) return festivalCache[year];
+
+  const res = await fetch(
+    `https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`
+  );
+  const data = await res.json();
+
+  const map = {};
+  data.response.holidays.forEach(h=>{
+    const d = h.date.datetime;
+    const key = `${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
+
+    if(
+      h.type.includes("Hindu") ||
+      h.type.includes("National holiday")
+    ){
+      map[key] = h.name;
+    }
+  });
+
+  festivalCache[year] = map;
+  return map;
+}
+
+async function renderCalendar(){
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
+
+  document.getElementById("calendar-month").innerText =
+    `${monthName} ${year} • ${hinduMonths[month]}`;
+
+  const festivals = await loadFestivals(year);
+  const grid = document.getElementById("calendar-grid");
+  grid.innerHTML = "";
+
+  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
+    const div=document.createElement("div");
+    div.className="day";
+    div.innerText=d;
+    grid.appendChild(div);
+  });
+
+  const firstDay = new Date(year,month,1).getDay();
+  const totalDays = new Date(year,month+1,0).getDate();
+
+  for(let i=0;i<firstDay;i++){
+    grid.appendChild(document.createElement("div"));
+  }
+
+  for(let d=1; d<=totalDays; d++){
+    const mm = String(month+1).padStart(2,"0");
+    const dd = String(d).padStart(2,"0");
+    const key = `${mm}-${dd}`;
+
+    const dateObj = new Date(year,month,d);
+    const cell = document.createElement("div");
+    cell.innerText = d;
+
+    if(dateObj.getDay()===0 || dateObj.getDay()===6){
+      cell.classList.add("weekend");
+    }
+
+    if(festivals[key]){
+      cell.classList.add("festival-day");
+      cell.title = festivals[key];
+    }
+
+    grid.appendChild(cell);
+  }
+
+  renderFestivals(month,year,festivals);
+}
+
+function renderFestivals(month,year,festivals){
+  const list = document.getElementById("festival-list");
+  list.innerHTML="";
+  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
+
+  document.getElementById("festival-title").innerText =
+    `${monthName} ${year} Festivals`;
+
+  Object.entries(festivals).forEach(([k,v])=>{
+    if(parseInt(k.split("-")[0])-1===month){
+      const li=document.createElement("li");
+      li.innerText = `${k.split("-")[1]} ${monthName} – ${v}`;
+      list.appendChild(li);
+    }
+  });
+
+  if(!list.children.length){
+    list.innerHTML="<li>No major festivals</li>";
+  }
+}
+
+function changeMonth(step){
+  currentDate.setMonth(currentDate.getMonth()+step);
+  renderCalendar();
+}
+
+renderCalendar();
+</script>
+
+
+    
 </body>
 </html>
+
 
 
 
