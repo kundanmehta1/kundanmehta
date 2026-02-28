@@ -8,6 +8,52 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+/* ================= HINDU CALENDAR ================= */
+.calendar-box{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:30px;
+    text-align:left;
+}
+
+.today, .festivals{
+    background:#fff;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+
+.calendar-box h3{
+    color:#1f4037;
+    margin-bottom:15px;
+}
+
+#festival-list{
+    list-style:none;
+}
+
+#festival-list li{
+    padding:10px 0;
+    border-bottom:1px solid #eee;
+    font-weight:500;
+}
+
+#festival-list span{
+    display:block;
+    font-size:14px;
+    color:#666;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .calendar-box{
+        grid-template-columns:1fr;
+    }
+}
+
+
+    
 /* ================= RESET ================= */
 *{
     margin:0;
@@ -411,7 +457,23 @@ footer{
 
     </div>
 </section>
+    
+<section id="hindu-calendar" class="section">
+    <h2>Hindu Calendar & Festivals</h2>
 
+    <div class="calendar-box">
+        <div class="today">
+            <h3>Today</h3>
+            <p id="today-date"></p>
+        </div>
+
+        <div class="festivals">
+            <h3>Upcoming Festivals</h3>
+            <ul id="festival-list"></ul>
+        </div>
+    </div>
+</section>
+    
 <section id="contact" class="section">
     <h2>Contact</h2>
     <div class="contacts">
@@ -471,6 +533,46 @@ function botReply(type){
 }
 </script>
 
+<script>
+const festivals = [
+  { date: "01-14", name: "Makar Sankranti" },
+  { date: "01-26", name: "Vasant Panchami" },
+  { date: "03-08", name: "Maha Shivaratri" },
+  { date: "03-25", name: "Holi" },
+  { date: "04-17", name: "Ram Navami" },
+  { date: "04-23", name: "Hanuman Jayanti" },
+  { date: "08-19", name: "Raksha Bandhan" },
+  { date: "08-26", name: "Janmashtami" },
+  { date: "09-07", name: "Ganesh Chaturthi" },
+  { date: "10-02", name: "Gandhi Jayanti" },
+  { date: "10-12", name: "Dussehra" },
+  { date: "11-01", name: "Diwali" },
+  { date: "11-15", name: "Bhai Dooj" },
+  { date: "11-19", name: "Chhath Puja" }
+];
+
+const today = new Date();
+const todayStr = today.toLocaleDateString("en-IN", {
+    weekday:"long", year:"numeric", month:"long", day:"numeric"
+});
+
+document.getElementById("today-date").innerText = todayStr;
+
+const list = document.getElementById("festival-list");
+const monthDay = String(today.getMonth()+1).padStart(2,"0") + "-" +
+                 String(today.getDate()).padStart(2,"0");
+
+festivals
+  .filter(f => f.date >= monthDay)
+  .slice(0,6)
+  .forEach(f => {
+    const li = document.createElement("li");
+    li.innerHTML = `${f.name} <span>Date: ${f.date}</span>`;
+    list.appendChild(li);
+  });
+</script>
+    
 </body>
 </html>
+
 
