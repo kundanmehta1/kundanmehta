@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-/* ---------- RESET ---------- */
+/* ================= RESET ================= */
 *{
     margin:0;
     padding:0;
@@ -22,7 +22,7 @@ body{
     line-height:1.6;
 }
 
-/* ---------- NAVBAR ---------- */
+/* ================= NAVBAR ================= */
 nav{
     position:sticky;
     top:0;
@@ -47,7 +47,7 @@ nav a:hover{
     color:#1f4037;
 }
 
-/* ---------- HERO ---------- */
+/* ================= HERO ================= */
 header{
     background:linear-gradient(135deg,#1f4037,#99f2c8);
     padding:90px 20px;
@@ -97,7 +97,7 @@ header{
     color:#fff;
 }
 
-/* ---------- SECTIONS ---------- */
+/* ================= SECTION ================= */
 .section{
     max-width:1100px;
     margin:auto;
@@ -117,7 +117,7 @@ header{
     font-size:18px;
 }
 
-/* ---------- SKILLS ---------- */
+/* ================= SKILLS ================= */
 .skills{
     margin-top:40px;
     display:grid;
@@ -137,7 +137,7 @@ header{
     transform:translateY(-6px);
 }
 
-/* ---------- IMPORTANT LINKS ---------- */
+/* ================= IMPORTANT LINKS ================= */
 .links-grid{
     margin-top:40px;
     display:grid;
@@ -184,7 +184,7 @@ header{
     margin-top:4px;
 }
 
-/* ---------- CONTACT ---------- */
+/* ================= CONTACT ================= */
 .contacts{
     margin-top:30px;
     display:flex;
@@ -208,11 +208,9 @@ header{
 .email{background:#EA4335;}
 .linkedin{background:#0077b5;}
 
-.contact:hover{
-    opacity:0.9;
-}
+.contact:hover{opacity:0.9;}
 
-/* ---------- FOOTER ---------- */
+/* ================= FOOTER ================= */
 footer{
     background:#1f4037;
     color:#fff;
@@ -221,7 +219,76 @@ footer{
     font-size:14px;
 }
 
-/* ---------- MOBILE ---------- */
+/* ================= CHAT ASSISTANT ================= */
+#chat-toggle{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#1f4037;
+    color:#fff;
+    font-size:22px;
+    padding:14px 16px;
+    border-radius:50%;
+    cursor:pointer;
+    box-shadow:0 6px 20px rgba(0,0,0,0.3);
+    z-index:9999;
+}
+
+#chat-box{
+    position:fixed;
+    bottom:90px;
+    right:25px;
+    width:300px;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+    z-index:9999;
+}
+
+#chat-header{
+    background:#1f4037;
+    color:#fff;
+    padding:12px;
+    font-weight:600;
+    display:flex;
+    justify-content:space-between;
+}
+
+#chat-messages{
+    padding:15px;
+    height:240px;
+    overflow-y:auto;
+    font-size:14px;
+}
+
+.bot{
+    background:#f1f3f5;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+#chat-options{
+    padding:10px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+#chat-options button{
+    padding:8px;
+    border:none;
+    border-radius:8px;
+    background:#99f2c8;
+    color:#1f4037;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* ================= MOBILE ================= */
 @media(max-width:768px){
     .hero{
         justify-content:center;
@@ -260,7 +327,6 @@ footer{
     <p>
         Workforce Management Specialist with expertise in Advanced Excel,
         Capacity Planning, Scheduling, and Business Intelligence.
-        Focused on performance optimization and data-driven decisions.
     </p>
 </section>
 
@@ -280,27 +346,15 @@ footer{
 
 <section id="important-links" class="section">
     <h2>Important Links</h2>
-
     <div class="links-grid">
 
         <div class="link-group">
             <h3>🆔 Government & Identity</h3>
             <ul>
-                <li>
-                    <a href="https://uidai.gov.in" target="_blank">Aadhaar Portal</a>
-                    <span>e-Aadhaar download & updates</span>
-                </li>
-                <li>
-                    <a href="https://www.epfindia.gov.in" target="_blank">EPFO Portal</a>
-                    <span>PF balance & claims</span>
-                </li>
-                <li>
-                    <a href="https://www.incometax.gov.in" target="_blank">Income Tax e-Filing</a>
-                    <span>ITR & refund status</span>
-                </li>
-                <li>
-                    <a href="https://www.india.gov.in" target="_blank">National Portal of India</a>
-                </li>
+                <li><a href="https://uidai.gov.in" target="_blank">Aadhaar Portal</a></li>
+                <li><a href="https://www.epfindia.gov.in" target="_blank">EPFO</a></li>
+                <li><a href="https://www.incometax.gov.in" target="_blank">Income Tax</a></li>
+                <li><a href="https://www.india.gov.in" target="_blank">National Portal</a></li>
             </ul>
         </div>
 
@@ -316,10 +370,7 @@ footer{
         <div class="link-group">
             <h3>💳 Banking & Payments</h3>
             <ul>
-                <li><a href="https://www.onlinesbi.sbi" target="_blank">SBI Online</a></li>
-                <li><a href="https://www.axis.bank.in" target="_blank">Axis Bank</a></li>
-                <li><a href="https://bankofbaroda.bank.in" target="_blank">Bank of Baroda</a></li>
-                <li><a href="https://www.indusind.bank.in" target="_blank">Indusind Bank</a></li>
+                <li><a href="https://www.onlinesbi.sbi" target="_blank">SBI</a></li>
                 <li><a href="https://paytm.com" target="_blank">Paytm</a></li>
                 <li><a href="https://www.phonepe.com" target="_blank">PhonePe</a></li>
                 <li><a href="https://pay.google.com" target="_blank">Google Pay</a></li>
@@ -330,7 +381,7 @@ footer{
             <h3>🎓 Education & Jobs</h3>
             <ul>
                 <li><a href="https://www.upsc.gov.in" target="_blank">UPSC</a></li>
-                <li><a href="https://ssc.gov.in" target="_blank">SSC</a></li>
+                <li><a href="https://ssc.nic.in" target="_blank">SSC</a></li>
                 <li><a href="https://www.linkedin.com" target="_blank">LinkedIn</a></li>
             </ul>
         </div>
@@ -349,8 +400,6 @@ footer{
 
 <section id="contact" class="section">
     <h2>Contact</h2>
-    <p>Let’s connect and explore opportunities.</p>
-
     <div class="contacts">
         <a class="contact whatsapp" href="https://wa.me/917631298918" target="_blank">
             <i class="fab fa-whatsapp"></i> WhatsApp
@@ -368,6 +417,45 @@ footer{
     © 2026 Kundan Mehta · Professional Portfolio
 </footer>
 
+<!-- CHAT ASSISTANT -->
+<div id="chat-toggle">💬</div>
+
+<div id="chat-box">
+    <div id="chat-header">
+        Kundan’s Assistant
+        <span onclick="document.getElementById('chat-box').style.display='none'">✖</span>
+    </div>
+
+    <div id="chat-messages">
+        <div class="bot">Hi 👋 How can I help you?</div>
+    </div>
+
+    <div id="chat-options">
+        <button onclick="botReply('about')">About</button>
+        <button onclick="botReply('skills')">Skills</button>
+        <button onclick="botReply('links')">Links</button>
+        <button onclick="botReply('contact')">Contact</button>
+    </div>
+</div>
+
+<script>
+document.getElementById("chat-toggle").onclick = () => {
+    document.getElementById("chat-box").style.display = "flex";
+};
+
+function botReply(type){
+    const box = document.getElementById("chat-messages");
+    let text = "";
+
+    if(type==="about") text="Kundan Mehta is a Workforce Management Specialist with strong expertise in Excel and BI tools.";
+    if(type==="skills") text="WFM, Advanced Excel, Power BI, Tableau, Scheduling, Capacity Planning.";
+    if(type==="links") text="Use the Important Links section to access Aadhaar, EPFO, Banking & more.";
+    if(type==="contact") text="Email: kundanmehta328@gmail.com | WhatsApp available.";
+
+    box.innerHTML += `<div class="bot">${text}</div>`;
+    box.scrollTop = box.scrollHeight;
+}
+</script>
+
 </body>
 </html>
-
