@@ -9,18 +9,7 @@
 
 <style>
 
-    .weekend{
-    background:#ffe5e5 !important;
-    color:#a40000;
-    font-weight:600;
-}
-
-.festival-day{
-    background:#ffb3b3 !important;
-    font-weight:700;
-    color:#7a0000;
-}
-/* ============ HINDU CALENDAR (FULL) ============ */
+ /* ================= CALENDAR ================= */
 .calendar-layout{
     margin-top:40px;
     display:grid;
@@ -34,7 +23,6 @@
     padding:25px;
     border-radius:16px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
-    text-align:left;
 }
 
 .calendar-header{
@@ -61,25 +49,26 @@
 
 .calendar-grid div{
     padding:10px;
-    text-align:center;
-    border-radius:6px;
     background:#f4f6f8;
+    border-radius:6px;
     font-size:14px;
 }
 
-.calendar-grid .day{
-    font-weight:600;
+.day{
     background:#e0f2eb;
+    font-weight:600;
 }
 
-.calendar-grid .festival-day{
-    background:#99f2c8;
+.weekend{
+    background:#ffe5e5;
+    color:#a40000;
+    font-weight:600;
+}
+
+.festival-day{
+    background:#ffb3b3;
+    color:#7a0000;
     font-weight:700;
-}
-
-.festival-panel h3{
-    color:#1f4037;
-    margin-bottom:15px;
 }
 
 #festival-list{
@@ -87,18 +76,8 @@
 }
 
 #festival-list li{
-    padding:10px 0;
+    padding:8px 0;
     border-bottom:1px solid #eee;
-    font-weight:500;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-    .calendar-layout{
-        grid-template-columns:1fr;
-    }
-}
-
     
 /* ================= RESET ================= */
 *{
@@ -413,6 +392,27 @@ footer{
         </div>
     </div>
 </header>
+<section id="calendar" class="section">
+<h2>Indian Festival Calendar</h2>
+
+<div class="calendar-layout">
+
+<div class="calendar-panel">
+    <div class="calendar-header">
+        <button onclick="changeMonth(-1)">◀</button>
+        <strong id="calendar-month"></strong>
+        <button onclick="changeMonth(1)">▶</button>
+    </div>
+    <div id="calendar-grid" class="calendar-grid"></div>
+</div>
+
+<div class="festival-panel">
+    <h3 id="festival-title"></h3>
+    <ul id="festival-list"></ul>
+</div>
+
+</div>
+</section>
 
 <section id="about" class="section">
     <h2>About Me</h2>
@@ -564,128 +564,84 @@ function botReply(type){
     box.scrollTop = box.scrollHeight;
 }
 </script>
-
 <script>
+document.getElementById("year").innerText = new Date().getFullYear();
+
 let currentDate = new Date();
 let festivalCache = {};
-
-const hinduMonths = [
-  "Chaitra","Vaishakha","Jyeshtha","Ashadha",
-  "Shravana","Bhadrapada","Ashwin","Kartika",
-  "Margashirsha","Pausha","Magha","Phalguna"
-];
-
-// 🔑 REPLACE YOUR_API_KEY with your real key
 const API_KEY = "ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN";
 
 async function loadFestivals(year){
-  if(festivalCache[year]) return festivalCache[year];
-
-  const res = await fetch(
-    `https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`
-  );
-  const data = await res.json();
-
-  const map = {};
-  data.response.holidays.forEach(h=>{
-    const d = h.date.datetime;
-    const key = `${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
-
-    if(
-      h.type.includes("Hindu") ||
-      h.type.includes("National holiday")
-    ){
-      map[key] = h.name;
-    }
-  });
-
-  festivalCache[year] = map;
-  return map;
+    if(festivalCache[year]) return festivalCache[year];
+    const res = await fetch(`https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`);
+    const data = await res.json();
+    const map = {};
+    data.response.holidays.forEach(h=>{
+        const d=h.date.datetime;
+        const key=`${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
+        if(h.type.includes("Hindu")||h.type.includes("National holiday")) map[key]=h.name;
+    });
+    festivalCache[year]=map;
+    return map;
 }
 
 async function renderCalendar(){
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
+    const year=currentDate.getFullYear();
+    const month=currentDate.getMonth();
+    document.getElementById("calendar-month").innerText =
+        currentDate.toLocaleString("en-IN",{month:"long",year:"numeric"});
 
-  document.getElementById("calendar-month").innerText =
-    `${monthName} ${year} • ${hinduMonths[month]}`;
+    const festivals=await loadFestivals(year);
+    const grid=document.getElementById("calendar-grid");
+    grid.innerHTML="";
 
-  const festivals = await loadFestivals(year);
-  const grid = document.getElementById("calendar-grid");
-  grid.innerHTML = "";
+    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
+        let div=document.createElement("div");
+        div.className="day";
+        div.innerText=d;
+        grid.appendChild(div);
+    });
 
-  ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
-    const div=document.createElement("div");
-    div.className="day";
-    div.innerText=d;
-    grid.appendChild(div);
-  });
+    let first=new Date(year,month,1).getDay();
+    let total=new Date(year,month+1,0).getDate();
 
-  const firstDay = new Date(year,month,1).getDay();
-  const totalDays = new Date(year,month+1,0).getDate();
+    for(let i=0;i<first;i++) grid.appendChild(document.createElement("div"));
 
-  for(let i=0;i<firstDay;i++){
-    grid.appendChild(document.createElement("div"));
-  }
-
-  for(let d=1; d<=totalDays; d++){
-    const mm = String(month+1).padStart(2,"0");
-    const dd = String(d).padStart(2,"0");
-    const key = `${mm}-${dd}`;
-
-    const dateObj = new Date(year,month,d);
-    const cell = document.createElement("div");
-    cell.innerText = d;
-
-    if(dateObj.getDay()===0 || dateObj.getDay()===6){
-      cell.classList.add("weekend");
+    for(let d=1;d<=total;d++){
+        let cell=document.createElement("div");
+        cell.innerText=d;
+        let key=`${String(month+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        let date=new Date(year,month,d);
+        if(date.getDay()==0||date.getDay()==6) cell.classList.add("weekend");
+        if(festivals[key]){cell.classList.add("festival-day");cell.title=festivals[key];}
+        grid.appendChild(cell);
     }
 
-    if(festivals[key]){
-      cell.classList.add("festival-day");
-      cell.title = festivals[key];
-    }
-
-    grid.appendChild(cell);
-  }
-
-  renderFestivals(month,year,festivals);
-}
-
-function renderFestivals(month,year,festivals){
-  const list = document.getElementById("festival-list");
-  list.innerHTML="";
-  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
-
-  document.getElementById("festival-title").innerText =
-    `${monthName} ${year} Festivals`;
-
-  Object.entries(festivals).forEach(([k,v])=>{
-    if(parseInt(k.split("-")[0])-1===month){
-      const li=document.createElement("li");
-      li.innerText = `${k.split("-")[1]} ${monthName} – ${v}`;
-      list.appendChild(li);
-    }
-  });
-
-  if(!list.children.length){
-    list.innerHTML="<li>No major festivals</li>";
-  }
+    const list=document.getElementById("festival-list");
+    list.innerHTML="";
+    document.getElementById("festival-title").innerText="Festivals";
+    Object.entries(festivals).forEach(([k,v])=>{
+        if(parseInt(k.split("-")[0])-1===month){
+            let li=document.createElement("li");
+            li.innerText=`${k.split("-")[1]} – ${v}`;
+            list.appendChild(li);
+        }
+    });
+    if(!list.children.length) list.innerHTML="<li>No major festivals</li>";
 }
 
 function changeMonth(step){
-  currentDate.setMonth(currentDate.getMonth()+step);
-  renderCalendar();
+    currentDate.setMonth(currentDate.getMonth()+step);
+    renderCalendar();
 }
 
 renderCalendar();
 </script>
 
-
     
 </body>
 </html>
+
 
 
 
