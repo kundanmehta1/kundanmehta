@@ -1,3 +1,5 @@
+i am giving you the updated coding, without removing just do the cleanup and rearranging and give add Hindu + indian festival as per real and should change every year instead of constant every year. 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +11,18 @@
 
 <style>
 
- /* ================= CALENDAR ================= */
+    .weekend{
+    background:#ffe5e5 !important;
+    color:#a40000;
+    font-weight:600;
+}
+
+.festival-day{
+    background:#ffb3b3 !important;
+    font-weight:700;
+    color:#7a0000;
+}
+/* ============ HINDU CALENDAR (FULL) ============ */
 .calendar-layout{
     margin-top:40px;
     display:grid;
@@ -23,6 +36,7 @@
     padding:25px;
     border-radius:16px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    text-align:left;
 }
 
 .calendar-header{
@@ -49,26 +63,25 @@
 
 .calendar-grid div{
     padding:10px;
-    background:#f4f6f8;
+    text-align:center;
     border-radius:6px;
+    background:#f4f6f8;
     font-size:14px;
 }
 
-.day{
+.calendar-grid .day{
+    font-weight:600;
     background:#e0f2eb;
-    font-weight:600;
 }
 
-.weekend{
-    background:#ffe5e5;
-    color:#a40000;
-    font-weight:600;
-}
-
-.festival-day{
-    background:#ffb3b3;
-    color:#7a0000;
+.calendar-grid .festival-day{
+    background:#99f2c8;
     font-weight:700;
+}
+
+.festival-panel h3{
+    color:#1f4037;
+    margin-bottom:15px;
 }
 
 #festival-list{
@@ -76,8 +89,18 @@
 }
 
 #festival-list li{
-    padding:8px 0;
+    padding:10px 0;
     border-bottom:1px solid #eee;
+    font-weight:500;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .calendar-layout{
+        grid-template-columns:1fr;
+    }
+}
+
     
 /* ================= RESET ================= */
 *{
@@ -379,7 +402,6 @@ footer{
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#important-links">Important Links</a>
-    <a href="#Calendar">Calendar<a/>
     <a href="#contact">Contact</a>
 </nav>
 
@@ -484,7 +506,30 @@ footer{
     </div>
 </section>
     
+<section id="hindu-calendar" class="section">
+  <h2>Hindu Calendar & Festivals</h2>
 
+  <div class="calendar-layout">
+
+    <!-- LEFT: CALENDAR -->
+    <div class="calendar-panel">
+      <div class="calendar-header">
+        <button onclick="changeMonth(-1)">‹</button>
+        <h3 id="calendar-month"></h3>
+        <button onclick="changeMonth(1)">›</button>
+      </div>
+
+      <div class="calendar-grid" id="calendar-grid"></div>
+    </div>
+
+    <!-- RIGHT: FESTIVALS -->
+    <div class="festival-panel">
+      <h3 id="festival-title"></h3>
+      <ul id="festival-list"></ul>
+    </div>
+
+  </div>
+</section>
     
 <section id="contact" class="section">
     <h2>Contact</h2>
@@ -544,115 +589,150 @@ function botReply(type){
     box.scrollTop = box.scrollHeight;
 }
 </script>
+
 <script>
-document.getElementById("year").innerText = new Date().getFullYear();
+const festivals = {
+  /* JAN */
+  "01-01": "New Year",
+  "01-14": "Makar Sankranti",
+  "01-26": "Republic Day",
 
+  /* FEB */
+  "02-14": "Vasant Panchami",
 
-<section id="calendar" class="section">
-<h2>Indian Festival Calendar</h2>
+  /* MAR */
+  "03-08": "Maha Shivaratri",
+  "03-25": "Holi",
 
-<div class="calendar-layout">
+  /* APR */
+  "04-14": "Ambedkar Jayanti",
+  "04-17": "Ram Navami",
+  "04-23": "Hanuman Jayanti",
 
-<div class="calendar-panel">
-    <div class="calendar-header">
-        <button onclick="changeMonth(-1)">◀</button>
-        <strong id="calendar-month"></strong>
-        <button onclick="changeMonth(1)">▶</button>
-    </div>
-    <div id="calendar-grid" class="calendar-grid"></div>
-</div>
+  /* MAY */
+  "05-01": "Labour Day",
 
-<div class="festival-panel">
-    <h3 id="festival-title"></h3>
-    <ul id="festival-list"></ul>
-</div>
+  /* AUG */
+  "08-15": "Independence Day",
+  "08-19": "Raksha Bandhan",
+  "08-26": "Janmashtami",
 
-</div>
-</section>
+  /* SEP */
+  "09-07": "Ganesh Chaturthi",
 
+  /* OCT */
+  "10-02": "Gandhi Jayanti",
+  "10-12": "Dussehra",
 
- 
+  /* NOV */
+  "11-01": "Diwali",
+  "11-15": "Bhai Dooj",
+
+  /* DEC */
+  "12-25": "Christmas"
+};
+</script>
+};
+
 let currentDate = new Date();
-let festivalCache = {};
-const API_KEY = "ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN";
 
-async function loadFestivals(year){
-    if(festivalCache[year]) return festivalCache[year];
-    const res = await fetch(`https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`);
-    const data = await res.json();
-    const map = {};
-    data.response.holidays.forEach(h=>{
-        const d=h.date.datetime;
-        const key=`${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
-        if(h.type.includes("Hindu")||h.type.includes("National holiday")) map[key]=h.name;
-    });
-    festivalCache[year]=map;
-    return map;
-}
+function renderCalendar(){
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
 
-async function renderCalendar(){
-    const year=currentDate.getFullYear();
-    const month=currentDate.getMonth();
-    document.getElementById("calendar-month").innerText =
-        currentDate.toLocaleString("en-IN",{month:"long",year:"numeric"});
+  document.getElementById("calendar-month").innerText =
+    `${monthName} ${year}`;
 
-    const festivals=await loadFestivals(year);
-    const grid=document.getElementById("calendar-grid");
-    grid.innerHTML="";
+  const grid = document.getElementById("calendar-grid");
+  grid.innerHTML = "";
 
-    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
-        let div=document.createElement("div");
-        div.className="day";
-        div.innerText=d;
-        grid.appendChild(div);
-    });
+  const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  days.forEach(d=>{
+    const div=document.createElement("div");
+    div.className="day";
+    div.innerText=d;
+    grid.appendChild(div);
+  });
 
-    let first=new Date(year,month,1).getDay();
-    let total=new Date(year,month+1,0).getDate();
+  const firstDay = new Date(year,month,1).getDay();
+  const totalDays = new Date(year,month+1,0).getDate();
 
-    for(let i=0;i<first;i++) grid.appendChild(document.createElement("div"));
+  for(let i=0;i<firstDay;i++){
+    grid.appendChild(document.createElement("div"));
+  }
 
-    for(let d=1;d<=total;d++){
-        let cell=document.createElement("div");
-        cell.innerText=d;
-        let key=`${String(month+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-        let date=new Date(year,month,d);
-        if(date.getDay()==0||date.getDay()==6) cell.classList.add("weekend");
-        if(festivals[key]){cell.classList.add("festival-day");cell.title=festivals[key];}
-        grid.appendChild(cell);
+  for(let d=1; d<=totalDays; d++){
+    const mm = String(month+1).padStart(2,"0");
+    const dd = String(d).padStart(2,"0");
+    const key = `${mm}-${dd}`;
+
+    const cell = document.createElement("div");
+    cell.innerText = d;
+
+    if(festivals[key]){
+      cell.classList.add("festival-day");
     }
 
-    const list=document.getElementById("festival-list");
-    list.innerHTML="";
-    document.getElementById("festival-title").innerText="Festivals";
-    Object.entries(festivals).forEach(([k,v])=>{
-        if(parseInt(k.split("-")[0])-1===month){
-            let li=document.createElement("li");
-            li.innerText=`${k.split("-")[1]} – ${v}`;
-            list.appendChild(li);
-        }
-    });
-    if(!list.children.length) list.innerHTML="<li>No major festivals</li>";
+    grid.appendChild(cell);
+  }
+
+  renderFestivals(month, year);
+}
+
+function renderFestivals(month, year){
+  const list = document.getElementById("festival-list");
+  list.innerHTML="";
+  const monthName = currentDate.toLocaleString("en-IN",{month:"long"});
+
+  document.getElementById("festival-title").innerText =
+    `${monthName} ${year} Festivals`;
+
+  Object.entries(festivals).forEach(([date,name])=>{
+    const [m,d]=date.split("-");
+    if(parseInt(m)-1===month){
+      const li=document.createElement("li");
+      li.innerText = `${d} ${monthName} – ${name}`;
+      list.appendChild(li);
+    }
+  });
+
+  if(!list.innerHTML){
+    list.innerHTML="<li>No major festivals listed</li>";
+  }
 }
 
 function changeMonth(step){
-    currentDate.setMonth(currentDate.getMonth()+step);
-    renderCalendar();
+  currentDate.setMonth(currentDate.getMonth()+step);
+  renderCalendar();
 }
 
 renderCalendar();
 </script>
+    for(let d=1; d<=totalDays; d++){
+  const mm = String(month+1).padStart(2,"0");
+  const dd = String(d).padStart(2,"0");
+  const key = `${mm}-${dd}`;
 
-    
+  const dateObj = new Date(year, month, d);
+  const day = dateObj.getDay(); // 0=Sun, 6=Sat
+
+  const cell = document.createElement("div");
+  cell.innerText = d;
+
+  if(day === 0 || day === 6){
+    cell.classList.add("weekend");
+  }
+
+  if(festivals[key]){
+    cell.classList.add("festival-day");
+    cell.title = festivals[key];
+  }
+
+  grid.appendChild(cell);
+}
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
