@@ -119,6 +119,34 @@ header{
     font-size:18px;
 }
 
+/* ===============CALENDAR ===============*/
+.calendar-layout{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:30px;margin-top:40px
+}
+.calendar-panel,.festival-panel{
+  background:#fff;padding:25px;border-radius:16px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08)
+}
+.calendar-header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:15px
+}
+.calendar-header button{
+  background:#1f4037;color:#fff;border:none;
+  padding:6px 12px;border-radius:6px;cursor:pointer
+}
+.calendar-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);gap:8px
+}
+.calendar-grid div{
+  padding:10px;text-align:center;border-radius:6px;
+  background:#f4f6f8;font-size:14px
+}
+.day{background:#e0f2eb;font-weight:600}
+.weekend{background:#ffe5e5;color:#a40000;font-weight:600}
+.festival-day{background:#ffb3b3;color:#7a0000;font-weight:700}
+
+
+    
 /* ================= SKILLS ================= */
 .skills{
     margin-top:40px;
@@ -414,7 +442,30 @@ footer{
     </div>
 </section>
     
+<nav>
+  <a href="#">Home</a>
+  <a href="#hindu-calendar">Calendar</a>
+</nav>
 
+<section id="hindu-calendar" class="section">
+<h2>Hindu Calendar & Festivals</h2>
+
+<div class="calendar-layout">
+  <div class="calendar-panel">
+    <div class="calendar-header">
+      <button onclick="changeMonth(-1)">‹</button>
+      <h3 id="calendar-month"></h3>
+      <button onclick="changeMonth(1)">›</button>
+    </div>
+    <div class="calendar-grid" id="calendar-grid"></div>
+  </div>
+
+  <div class="festival-panel">
+    <h3 id="festival-title"></h3>
+    <ul id="festival-list"></ul>
+  </div>
+</div>
+</section>
     
 <section id="contact" class="section">
     <h2>Contact</h2>
@@ -590,10 +641,94 @@ function botReply(type){
     box.innerHTML += `<div class="bot">${text}</div>`;
     box.scrollTop = box.scrollHeight;
 }
+let currentDate=new Date();
+let cache={};
+
+const hinduMonths=[
+ "Chaitra","Vaishakha","Jyeshtha","Ashadha",
+ "Shravana","Bhadrapada","Ashwin","Kartika",
+ "Margashirsha","Pausha","Magha","Phalguna"
+];
+
+const API_KEY="ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN";
+
+async function loadFestivals(year){
+ if(cache[year]) return cache[year];
+
+ const res=await fetch(
+  `https://calendarific.com/api/v2/holidays?api_key=${API_KEY}&country=IN&year=${year}`
+ );
+ const data=await res.json();
+ const map={};
+
+ data.response.holidays.forEach(h=>{
+  const d=h.date.datetime;
+  const key=`${String(d.month).padStart(2,"0")}-${String(d.day).padStart(2,"0")}`;
+  if(h.type.includes("Hindu")||h.type.includes("National")) map[key]=h.name;
+ });
+
+ cache[year]=map;
+ return map;
+}
+
+async function renderCalendar(){
+ const y=currentDate.getFullYear();
+ const m=currentDate.getMonth();
+ document.getElementById("calendar-month").innerText=
+  `${currentDate.toLocaleString("en-IN",{month:"long"})} ${y} • ${hinduMonths[m]}`;
+
+ const festivals=await loadFestivals(y);
+ const grid=document.getElementById("calendar-grid");
+ grid.innerHTML="";
+
+ ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
+  const el=document.createElement("div");
+  el.className="day";el.innerText=d;grid.appendChild(el);
+ });
+
+ const first=new Date(y,m,1).getDay();
+ const total=new Date(y,m+1,0).getDate();
+ for(let i=0;i<first;i++) grid.appendChild(document.createElement("div"));
+
+ for(let d=1;d<=total;d++){
+  const el=document.createElement("div");
+  el.innerText=d;
+  const date=new Date(y,m,d);
+  const key=`${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+  if(date.getDay()==0||date.getDay()==6) el.classList.add("weekend");
+  if(festivals[key]){el.classList.add("festival-day");el.title=festivals[key]}
+  grid.appendChild(el);
+ }
+
+ renderFestivalList(m,y,festivals);
+}
+
+function renderFestivalList(m,y,f){
+ const list=document.getElementById("festival-list");
+ list.innerHTML="";
+ document.getElementById("festival-title").innerText=
+  `${currentDate.toLocaleString("en-IN",{month:"long"})} ${y} Festivals`;
+ Object.entries(f).forEach(([k,v])=>{
+  if(parseInt(k.split("-")[0])-1===m){
+   const li=document.createElement("li");
+   li.innerText=`${k.split("-")[1]} – ${v}`;
+   list.appendChild(li);
+  }
+ });
+ if(!list.children.length) list.innerHTML="<li>No festivals</li>";
+}
+
+function changeMonth(n){
+ currentDate.setMonth(currentDate.getMonth()+n);
+ renderCalendar();
+}
+
+renderCalendar();
 </script>
 
 </body>
 </html>
+
 
 
 
