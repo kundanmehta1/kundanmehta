@@ -379,6 +379,7 @@ footer{
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#important-links">Important Links</a>
+    <a href="#Calendar">Calendar<a/>
     <a href="#contact">Contact</a>
 </nav>
 
@@ -392,27 +393,6 @@ footer{
         </div>
     </div>
 </header>
-<section id="calendar" class="section">
-<h2>Indian Festival Calendar</h2>
-
-<div class="calendar-layout">
-
-<div class="calendar-panel">
-    <div class="calendar-header">
-        <button onclick="changeMonth(-1)">◀</button>
-        <strong id="calendar-month"></strong>
-        <button onclick="changeMonth(1)">▶</button>
-    </div>
-    <div id="calendar-grid" class="calendar-grid"></div>
-</div>
-
-<div class="festival-panel">
-    <h3 id="festival-title"></h3>
-    <ul id="festival-list"></ul>
-</div>
-
-</div>
-</section>
 
 <section id="about" class="section">
     <h2>About Me</h2>
@@ -567,6 +547,31 @@ function botReply(type){
 <script>
 document.getElementById("year").innerText = new Date().getFullYear();
 
+
+<section id="calendar" class="section">
+<h2>Indian Festival Calendar</h2>
+
+<div class="calendar-layout">
+
+<div class="calendar-panel">
+    <div class="calendar-header">
+        <button onclick="changeMonth(-1)">◀</button>
+        <strong id="calendar-month"></strong>
+        <button onclick="changeMonth(1)">▶</button>
+    </div>
+    <div id="calendar-grid" class="calendar-grid"></div>
+</div>
+
+<div class="festival-panel">
+    <h3 id="festival-title"></h3>
+    <ul id="festival-list"></ul>
+</div>
+
+</div>
+</section>
+
+
+ 
 let currentDate = new Date();
 let festivalCache = {};
 const API_KEY = "ryTRqOGCWMdWnJ5YGLqvZ0fJA0B3E7gN";
@@ -641,6 +646,7 @@ renderCalendar();
     
 </body>
 </html>
+
 
 
 
